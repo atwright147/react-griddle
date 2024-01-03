@@ -1,19 +1,23 @@
-import { CSSProperties, FC, PropsWithChildren } from 'react';
+import { CSSProperties, ComponentPropsWithRef, FC, ReactNode, forwardRef } from 'react';
 
-interface Props {
+export interface Props extends ComponentPropsWithRef<'section'> {
+  children?: ReactNode;
   columns: number;
   gap: number;
   rowHeight: number;
 }
 
-// TODO: add forwardRef
-export const CssGrid: FC<PropsWithChildren<Props>> = ({ columns, gap, rowHeight, children }): JSX.Element => {
+export const CssGrid: FC<Props> = forwardRef(({ columns, gap, rowHeight, children, ...props }, ref) => {
   const styles: CSSProperties = {
     display: 'grid',
     gap: `${gap}px`,
-    gridTemplateColumns: `repeat(${columns}, 1fr)`,
     gridAutoRows: `${rowHeight}px`,
+    gridTemplateColumns: `repeat(${columns}, 1fr)`,
   };
 
-  return <div style={styles}>{children}</div>;
-};
+  return (
+    <section style={styles} {...props} ref={ref}>
+      {children}
+    </section>
+  );
+});
