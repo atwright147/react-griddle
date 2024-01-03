@@ -11,6 +11,10 @@ function App() {
   const [items, setItems] = useState<string[]>([]);
 
   const handleDragEnd = (event: DragEndEvent): void => {
+    if (!event.active || !event.over) {
+      return;
+    }
+
     setItems((state) => [...state, event.active.id as string]);
     console.info(event);
 
