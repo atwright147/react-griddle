@@ -1,5 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { CssGrid } from './CssGrid';
 import styles from './Droppable.module.scss';
 
@@ -8,8 +8,18 @@ interface Props {
 }
 
 export const Droppable: FC<Props> = ({ id }): JSX.Element => {
-  const { isOver, setNodeRef } = useDroppable({
+  const { isOver, setNodeRef, node } = useDroppable({
     id,
+  });
+
+  useEffect(() => {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    const styles = getComputedStyle(node.current!);
+    console.info(styles.display);
+    console.info(styles.gap);
+    console.info(styles.gridAutoRows);
+    console.info(styles.gridTemplateColumns);
+    console.info(node.current?.dataset.columns);
   });
 
   const style = {

@@ -16,7 +16,7 @@ export const CssGrid: FC<Props> = forwardRef(({ columns, gap, rowHeight, childre
   };
 
   return (
-    <section style={styles} {...props} ref={ref}>
+    <section style={styles} {...props} ref={ref} data-columns={columns}>
       {children}
     </section>
   );
