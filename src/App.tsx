@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, DragOverlay } from '@dnd-kit/core';
 import { useState } from 'react';
 
 import { CssGrid } from './components/CssGrid';
@@ -44,6 +44,10 @@ function App() {
         </div>
 
         <Droppable id="droppable" />
+
+        <DragOverlay>
+          <div style={{ backgroundColor: 'rgba(255, 0, 0, 0.5)', width: '100%', height: '100%' }} />
+        </DragOverlay>
 
         <pre className={styles.items}>{JSON.stringify(items, null, 2)}</pre>
       </DndContext>
